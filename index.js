@@ -25,8 +25,8 @@ io.on('connection', (socket) => {
   io.emit("init chat", read())
 
   socket.on('chat message', (msg) => {
-    insertarMensaje(msg)
-    io.emit('chat message', msg);
+      insertarMensaje(msg)
+      io.emit('chat message', msg);
   });
   
   
@@ -38,6 +38,9 @@ io.on('connection', (socket) => {
 });
 
 
+
 server.listen(3000, () => {
     console.log('Servidor iniciado en el http://localhost:3000/');
 });
+
+

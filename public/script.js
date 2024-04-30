@@ -39,18 +39,23 @@ form.addEventListener('submit', (e) => {
 
 //Evento de inicio de chat
 socket.on('init chat', (mensajes) => {
-  console.log(mensajes)
   mensajes.forEach(mensajeObjeto => {
     const li = document.createElement("li");
-    li.innerHTML = mensajeObjeto.mensaje;
+    mensajeObjeto.startsWith('https://') ? li.innerHTML = `<a href=${mensajeObjeto}>${mensajeObjeto}</a> ` : li.innerHTML = mensajeObjeto.mensaje
     messages.appendChild(li);
   });
 });
 
 //Este evento se dispara cuando el backend me responde con 'chat message'
 socket.on('chat message', (msg) => {
-  const item = document.createElement('li');
-  item.textContent = msg;
+  const item = document.createElement('a');
+  if(isUrl(msg)){
+    item.href = msg
+    item.textContent = msg;
+  }
+  else{
+    item.textContent = msg;
+  }
   messages.appendChild(item);
   window.scrollTo(0, document.body.scrollHeight);
 });
@@ -72,4 +77,7 @@ function draw() {
     }
 }
 
+function isUrl(string){
+  return string.startsWith('https://');
+};
  
