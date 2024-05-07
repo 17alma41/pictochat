@@ -48,8 +48,8 @@ socket.on('init chat', (mensajes) => {
       messages.appendChild(link)
     }else{
       li.textContent = mensajeObjeto
-      messages.appendChild(li);
     }
+    messages.appendChild(li);
   });
 });
 
