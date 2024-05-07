@@ -39,10 +39,17 @@ form.addEventListener('submit', (e) => {
 
 //Evento de inicio de chat
 socket.on('init chat', (mensajes) => {
-  mensajes.forEach(mensajeObjeto => {
+  mensajes.reverse().forEach(mensajeObjeto => {
     const li = document.createElement("li");
-    mensajeObjeto.startsWith('https://') ? li.innerHTML = `<a href=${mensajeObjeto}>${mensajeObjeto}</a> ` : li.innerHTML = mensajeObjeto.mensaje
-    messages.appendChild(li);
+    if(mensajeObjeto.startsWith('https://')){
+      const link = document.createElement("a")
+      link.href = mensajeObjeto
+      link.textContent = mensajeObjeto
+      messages.appendChild(link)
+    }else{
+      li.textContent = mensajeObjeto
+      messages.appendChild(li);
+    }
   });
 });
 
